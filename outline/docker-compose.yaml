@@ -3,7 +3,7 @@ services:
 
   outline:
     image: outlinewiki/outline:0.72.0
-    env_file: stack2.env
+    env_file: outline/stack.env
     ports:
       - "3000:3000"
     volumes:
