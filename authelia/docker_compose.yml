@@ -1,0 +1,18 @@
+---
+services:
+  authelia:
+    container_name: 'authelia'
+    image: 'docker.io/authelia/authelia:latest'
+    restart: 'unless-stopped'
+    env_file: ../stack.yml
+    ports:
+      - "9091:9091"
+    volumes:
+      - config:/config
+
+volumes:
+  config:
+    driver_opts:
+      o: "username=$SMB_USR,password=$SMB_PASSWD,addr=192.168.50.106,uid=1000,gid=1000,forceuid,forcegid"
+      type: cifs
+      device: "//192.168.50.106/authelia_config"
