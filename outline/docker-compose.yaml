@@ -26,6 +26,8 @@ services:
       retries: 3
 
 volumes:
-  https-portal-data:
   storage-data:
-  database-data:
+    drive_opts:
+      o: "username=outline,password=$OUTLINE_CIFS_PWD,addr=192.168.50.106,uid=1000,gid=1000,forceuid,forcegid"
+      type: cifs
+      device: "//192.168.50.106/outline"
