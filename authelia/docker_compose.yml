@@ -2,7 +2,7 @@
 services:
   authelia:
     container_name: 'authelia'
-    image: 'docker.io/authelia/authelia:latest'
+    image: 'docker.io/authelia/authelia:4.38.8'
     restart: 'unless-stopped'
     #env_file: ../stack.yml
     ports:
