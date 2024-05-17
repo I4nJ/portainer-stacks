@@ -1,0 +1,22 @@
+version: "3"
+volumes:
+  uploads:
+    driver_opts:
+      type: cifs
+      o: "username=$DIRECTUS_UPLOADS_SMB_USR,password=$DIRECTUS_UPLOADS_SMB_PWD,addr=192.168.50.106,rw,uid=1000,gid=1000"
+      device: "//$DIRECTUS_SMB_HOST/directus-uploads"
+  extensions:
+    driver_opts:
+      type: cifs
+      o: "username=$DIRECTUS_EXTENSIONS_SMB_USR,password=$DIRECTUS_EXTENSIONS_SMB_PWD,addr=192.168.50.106,rw,uid=1000,gid=1000"
+      device: "//$DIRECTUS_SMB_HOST/directus-extensions"
+
+services:
+  directus:
+    image: directus/directus:10.10.5
+    ports:
+      - 8055:8055
+    volumes:
+      - uploads:/directus/uploads
+      - extensions:/directus/extensions
+    env_file: ../stack.env
