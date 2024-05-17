@@ -4,7 +4,7 @@ services:
     container_name: 'authelia'
     image: 'docker.io/authelia/authelia:4.38.8'
     restart: 'unless-stopped'
-    #env_file: ../stack.yml
+    env_file: ../stack.yml
     ports:
       - "9091:9091"
     volumes:
