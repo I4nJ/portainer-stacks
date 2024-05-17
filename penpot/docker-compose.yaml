@@ -21,7 +21,7 @@ services:
       - penpot
     env_file: ../stack.env
     environment:
-      - PENPOT_FLAGS=$PENPOT_FRONTEND_FLAGS
+      - PENPOT_FLAGS=enable-registration enable-login-with-oidc
 
   penpot-backend:
     image: "penpotapp/backend:latest"
@@ -34,7 +34,7 @@ services:
       - penpot
     env_file: ../stack.env
     environment:
-      - PENPOT_FLAGS=$PENPOT_BACKEND_FLAGS
+      - PENPOT_FLAGS=enable-registration disable-email-verification enable-smtp enable-prepl-server enable-login-with-oidc
 
   penpot-exporter:
     image: "penpotapp/exporter:latest"
