@@ -1,0 +1,30 @@
+---
+volumes:
+  ytdl_video:
+    driver_opts:
+      type: cifs
+      o: "username=$YTDL_VIDEO_SMB_USR,password=$YTDL_VIDEO_SMB_PWD,addr=$YTDL_SMB_HOST,rw,uid=1006,gid=1008"
+      device: "//$YTDL_SMB_HOST/ytdl_video"
+  ytdl_audio:
+    driver_opts:
+      type: cifs
+      o: "username=$YTDL_VIDEO_SMB_USR,password=$YTDL_VIDEO_SMB_PWD,addr=$YTDL_SMB_HOST,rw,uid=1006,gid=1008"
+      device: "//$YTDL_SMB_HOST/ytdl_audio"
+
+services:
+  metube:
+    image: alexta69/metube
+    container_name: metube
+    restart: unless-stopped
+    environment:
+      DOWNLOAD_DIR: /downloads_video
+      AUDIO_DOWNLOAD_DIR: /downloads_audio 
+      UID: 1006
+      GID: 1008
+    ports:
+      - "8998:8081"
+    volumes:
+      - ytdl_video:/downloads_video
+      - ytdl_audio:/downloads_audio
+    env_file: ../stack.env
+
