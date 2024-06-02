@@ -4,7 +4,7 @@ volumes:
     driver_opts:
       type: cifs
       o: "username=$JOPLIN_SMB_USR,password=$JOPLIN_SMB_PWD,addr=$JOPLIN_SMB_HOST,rw,uid=1000,gid=1000"
-      device: "//$JOPLIN_SMB_HOST/directus-uploads"
+      device: "//$JOPLIN_SMB_HOST/joplin"
 
 services:
   app:
