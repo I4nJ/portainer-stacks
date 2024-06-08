@@ -4,12 +4,12 @@ volumes:
     driver_opts:
       type: cifs
       o: "username=$JENNY_SMB_USR,password=$JENNY_SMB_PWD,addr=$JENNY_SMB_HOST,rw,uid=1015,gid=1019"
-      device: "//$JENNY_SMB_HOST/jenny"
+      device: "//$JENNY_SMB_HOST/jenny/ytdl_video"
   ytdl_audio:
     driver_opts:
       type: cifs
       o: "username=$JENNY_SMB_USR,password=$JENNY_SMB_PWD,addr=$JENNY_SMB_HOST,rw,uid=1015,gid=1019"
-      device: "//$JENNY_SMB_HOST/jenny"
+      device: "//$JENNY_SMB_HOST/jenny/ytdl_audio"
 
 services:
   metube:
