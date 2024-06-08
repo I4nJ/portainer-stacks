@@ -3,12 +3,12 @@ volumes:
   ytdl_video:
     driver_opts:
       type: cifs
-      o: "username=$JENNY_SMB_USR,password=$JENNY_SMB_PWD,addr=$JENNY_SMB_HOST,rw,uid=1015,gid=1019"
+      o: "username=$JENNY_SMB_USR,password=$JENNY_SMB_PWD,addr=$JENNY_SMB_HOST,rw,uid=1000,gid=1000"
       device: "//$JENNY_SMB_HOST/jenny"
   ytdl_audio:
     driver_opts:
       type: cifs
-      o: "username=$JENNY_SMB_USR,password=$JENNY_SMB_PWD,addr=$JENNY_SMB_HOST,rw,uid=1015,gid=1019"
+      o: "username=$JENNY_SMB_USR,password=$JENNY_SMB_PWD,addr=$JENNY_SMB_HOST,rw,uid=1000,gid=1000"
       device: "//$JENNY_SMB_HOST/jenny"
 
 services:
