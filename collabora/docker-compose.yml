@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  collabora:
+    image: collabora/code
+    ports:
+      - "9980:9980"
+    env_file: ../stack.env
+    environment:
+      - domain=$COLLABORA_DOMAIN
+      - username=$COLLABORA_USERNAME
+      - password=$COLLABORA_PASSWORD
+      - extra_params=--o:ssl.enable=false --o:ssl.termination=true
+    restart: always
