@@ -31,8 +31,6 @@ services:
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       PAPERLESS_DBHOST: db
-    env_file:
-      - stack.env
 
 volumes:
   data:
