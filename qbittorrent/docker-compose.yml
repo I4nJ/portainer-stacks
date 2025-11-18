@@ -3,7 +3,7 @@ volumes:
   qbittorrent:
     driver_opts:
       type: cifs
-      o: "username=$QBITTORRENT_SMB_USR,password=$QBITTORRENT_SMB_PWD,addr=$QBITTORRENT_HOST,rw,uid=1006,gid=1008"
+      o: "username=$QBITTORRENT_SMB_USR,password=$QBITTORRENT_SMB_PWD,addr=$QBITTORRENT_HOST,rw,uid=3001,gid=3001"
       device: "//$QBITTORRENT_SMB_HOST/qbittorrent"
 
 services:
@@ -12,8 +12,8 @@ services:
     container_name: qbittorrent
     restart: unless-stopped
     environment:
-      PUID: 1006
-      PGID: 1008
+      PUID: 3001
+      PGID: 3001
       TZ: Etc/UTC
       WEBUI_PORT: 8080
       TORRENTING_PORT: 6881
