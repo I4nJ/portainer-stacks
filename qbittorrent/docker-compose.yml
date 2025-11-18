@@ -3,7 +3,7 @@ volumes:
   qbittorrent:
     driver_opts:
       type: cifs
-      o: "username=$QBITTORRENT_SMB_USR,password=$QBITTORRENT_SMB_PWD,addr=$QBITTORRENT_HOST,rw,uid=3001,gid=3001"
+      o: "username=$QBITTORRENT_SMB_USR,password=$QBITTORRENT_SMB_PWD,addr=$QBITTORRENT_SMB_HOST,rw,uid=3001,gid=3001"
       device: "//$QBITTORRENT_SMB_HOST/qbittorrent"
 
 services:
