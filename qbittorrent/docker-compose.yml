@@ -3,12 +3,12 @@ volumes:
   qbittorrent:
     driver_opts:
       type: cifs
-      o: "username=$QBITTORRENT_SMB_USR,password=$QBITTORRENT_SMB_PWD,addr=$QBITTORRENT_SMB_HOST,rw,uid=3001,gid=3001"
+      o: "username=$QBITTORRENT_SMB_USR,password=$QBITTORRENT_SMB_PWD,addr=$SMB_HOST,rw,uid=3001,gid=3001"
       device: "//$SMB_HOST/qbittorrent"
   jellyfin:
     driver_opts:
       type: cifs
-      o: "username=$JELLYFIN_SMB_USR,password=$JELLYFIN_SMB_PWD,addr=$JELLYFIN_SMB_HOST,rw,uid=1004,gid=1005"
+      o: "username=$JELLYFIN_SMB_USR,password=$JELLYFIN_SMB_PWD,addr=$SMB_HOST,rw,uid=1004,gid=1005"
       device: "//$SMB_HOST/jellyfin"
 
 services:
