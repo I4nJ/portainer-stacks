@@ -28,6 +28,6 @@ services:
       - "6881:6881/udp"
     volumes:
       - qbittorrent:/downloads
-      - jellyfin:/downloads/jellyfin
+      - jellyfin:/jellyfin
     env_file: ../stack.env
 
