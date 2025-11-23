@@ -5,6 +5,11 @@ volumes:
       type: cifs
       o: "username=$QBITTORRENT_SMB_USR,password=$QBITTORRENT_SMB_PWD,addr=$SMB_HOST,rw,uid=3001,gid=3001"
       device: "//$SMB_HOST/qbittorrent"
+  qbittorrent-config:
+    driver_opts:
+      type: cifs
+      o: "username=$QBITTORRENT_SMB_USR,password=$QBITTORRENT_SMB_PWD,addr=$SMB_HOST,rw,uid=3001,gid=3001"
+      device: "//$SMB_HOST/qbittorrent=config"
   jellyfin:
     driver_opts:
       type: cifs
@@ -27,7 +32,7 @@ services:
       - "6881:6881"
       - "6881:6881/udp"
     volumes:
-      - qbittorrent/appdata:/config
+      - qbittorrent-config:/config
       - qbittorrent:/downloads
       - jellyfin:/jellyfin
     env_file: ../stack.env
