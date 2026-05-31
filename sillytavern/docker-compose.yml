@@ -1,6 +1,6 @@
 services:
   sillytavern:
-    build: ..
+    build: .
     container_name: sillytavern
     hostname: sillytavern
     image: ghcr.io/sillytavern/sillytavern:latest
