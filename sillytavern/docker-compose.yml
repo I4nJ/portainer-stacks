@@ -16,5 +16,5 @@ volumes:
     driver_opts:
       type: cifs
       o: "username=$SILLYTAVERN_SMB_USR,password=$SILLYTAVERN_SMB_PWD,addr=$SILLYTAVERN_SMB_HOST,rw,uid=1006,gid=1008"
-      device: "//$SILLYTAVERN_SMB_HOST/ytdl_video"
+      device: "//$SILLYTAVERN_SMB_HOST/sillytavern"
 
