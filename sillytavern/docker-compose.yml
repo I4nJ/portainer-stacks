@@ -5,9 +5,5 @@ services:
       - TZ=Asia/Shanghai
     ports:
       - '8000:8000'
-    volumes:
-      - 'docker/sillytavern/plugins:/home/node/app/plugins:rw'
-      - 'docker/sillytavern/config:/home/node/app/config:rw'
-      - 'docker/sillytavern/data:/home/node/app/data:rw'
     restart: unless-stopped
     image: 'ghcr.io/sillytavern/sillytavern:latest'
