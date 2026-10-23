@@ -21,7 +21,7 @@ services:
       AIO_LOG_LEVEL: ${AIO_LOG_LEVEL:-info} # debug|info|warn|error
     ports:
       # Signaling HTTP (NPM proxies to this; do NOT publish 8081 publicly via router)
-      - "127.0.0.1:${SIGNALING_LOCAL_PORT:-8081}:8081"
+      - "0.0.0.0:${SIGNALING_LOCAL_PORT:-8081}:8081"
       # TURN — MUST be reachable directly, NOT via NPM. Router forwards these to Portainer VM IP.
       - "${TALK_PORT:-3478}:${TALK_PORT:-3478}/tcp"
       - "${TALK_PORT:-3478}:${TALK_PORT:-3478}/udp"
