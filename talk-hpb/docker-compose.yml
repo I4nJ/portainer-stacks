@@ -1,0 +1,34 @@
+services:
+  talk-hpb:
+    # AIO Talk HPB: signaling + NATS + Janus + eturnal (TURN) in one container
+    # Upstream: https://github.com/nextcloud/all-in-one/tree/main/Containers/talk
+    # Pins at time of writing: signaling 2.1.1, nats 2.15.0, eturnal 1.12.3
+    # Use a pinned tag in Portainer for reproducibility, e.g. nextcloud/aio-talk:20251128_084214
+    image: nextcloud/aio-talk:latest
+    container_name: talk-hpb
+    restart: unless-stopped
+    # No persistent volumes needed — start.sh generates /conf/* from env on boot.
+    # LE certs are terminated at NPM, not in this container.
+    environment:
+      NC_DOMAIN: ${NC_DOMAIN}               # nxtcld.jmsn.net — must match Nextcloud overwrite + backend URL
+      TALK_HOST: ${TALK_HOST}               # signal.jmsn.net — used for relay IP detection (dig)
+      TURN_DOMAIN: ${TURN_DOMAIN}           # turn.jmsn.net — advertised in Janus TURN candidates
+      TALK_PORT: ${TALK_PORT:-3478}         # eturnal listen port (udp+tcp). AIO only exposes this one TURN port.
+      TURN_SECRET: ${TURN_SECRET}           # from Bitwarden — must match occ talk:turn:add
+      SIGNALING_SECRET: ${SIGNALING_SECRET} # from Bitwarden — must match occ talk:signaling:add
+      INTERNAL_SECRET: ${INTERNAL_SECRET}   # from Bitwarden — internal clients only
+      SKIP_CERT_VERIFY: "false"             # LE is valid, keep verification on
+      AIO_LOG_LEVEL: ${AIO_LOG_LEVEL:-info} # debug|info|warn|error
+    ports:
+      # Signaling HTTP (NPM proxies to this; do NOT publish 8081 publicly via router)
+      - "127.0.0.1:${SIGNALING_LOCAL_PORT:-8081}:8081"
+      # TURN — MUST be reachable directly, NOT via NPM. Router forwards these to Portainer VM IP.
+      - "${TALK_PORT:-3478}:${TALK_PORT:-3478}/tcp"
+      - "${TALK_PORT:-3478}:${TALK_PORT:-3478}/udp"
+    healthcheck:
+      # Mirrors upstream healthcheck.sh: signaling 8081 + janus 8188 + nats 4222 + turn $TALK_PORT
+      test: ["CMD-SHELL", "nc -z 127.0.0.1 8081 && nc -z 127.0.0.1 8188 && nc -z 127.0.0.1 4222 && nc -z 127.0.0.1 $${TALK_PORT:-3478} && wget -q -O /dev/null http://127.0.0.1:8081/api/v1/stats || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
